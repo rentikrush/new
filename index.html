@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestra historia 💖</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+
+    /* 🌄 ТВОЙ ФОН */
+    background: 
+        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)),
+        url("background.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* затемнение поверх (чтобы читалось) */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.2);
+    pointer-events: none;
+}
+
+/* 📦 контейнер */
+.container {
+    max-width: 720px;
+    margin: auto;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+/* 📸 фото */
+img {
+    width: 100%;
+    max-width: 320px;
+    border-radius: 18px;
+    margin: 25px 0;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+/* 💌 scratch блок */
+.scratch {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    margin: 25px auto;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+/* скрытый текст */
+.message {
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-size: 16px;
+}
+
+/* canvas слой */
+canvas {
+    position: absolute;
+    inset: 0;
+    touch-action: none;
+}
+
+/* подсказка */
+.hint {
+    font-size: 14px;
+    color: #ffb6c1;
+    margin-top: 8px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2 style="color:#ffb6c1;">Nuestra historia 💖</h2>
+
+<img src="lola1.jpg">
+
+<div class="scratch">
+    <div class="message">
+        Nos conocimos sin buscar nada especial…<br>
+        pero algunas personas simplemente llegan en el momento correcto 💖
+    </div>
+    <canvas></canvas>
+</div>
+
+<div class="hint">desliza para descubrir ✨</div>
+
+<img src="lola2.jpg">
+
+<div class="scratch">
+    <div class="message">
+        Con el tiempo, todo se volvió parte del día…<br>
+        y sin darme cuenta, empezó a importar más de lo esperado.
+    </div>
+    <canvas></canvas>
+</div>
+
+<div class="hint">sigue revelando ✨</div>
+
+<div class="scratch">
+    <div class="message">
+        No sé si esto tiene un nombre…<br>
+        pero me gusta que seas parte de mi historia 💖
+    </div>
+    <canvas></canvas>
+</div>
+
+</div>
+
+<script>
+
+document.querySelectorAll(".scratch").forEach(initScratch);
+
+function initScratch(el) {
+    const canvas = el.querySelector("canvas");
+    const ctx = canvas.getContext("2d");
+
+    function resize() {
+        canvas.width = el.offsetWidth;
+        canvas.height = el.offsetHeight;
+
+        ctx.fillStyle = "#999";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // шум
+        for (let i = 0; i < 600; i++) {
+            ctx.fillStyle = "rgba(255,255,255,0.2)";
+            ctx.fillRect(
+                Math.random() * canvas.width,
+                Math.random() * canvas.height,
+                1,
+                1
+            );
+        }
+    }
+
+    resize();
+    window.addEventListener("resize", resize);
+
+    let drawing = false;
+
+    function scratch(x, y) {
+        ctx.globalCompositeOperation = "destination-out";
+        ctx.beginPath();
+        ctx.arc(x, y, 25, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    canvas.addEventListener("mousedown", () => drawing = true);
+    canvas.addEventListener("mouseup", () => drawing = false);
+    canvas.addEventListener("mousemove", (e) => {
+        if (!drawing) return;
+        const r = canvas.getBoundingClientRect();
+        scratch(e.clientX - r.left, e.clientY - r.top);
+    });
+
+    canvas.addEventListener("touchmove", (e) => {
+        const r = canvas.getBoundingClientRect();
+        const t = e.touches[0];
+        scratch(t.clientX - r.left, t.clientY - r.top);
+    });
+}
+
+</script>
+
+</body>
+</html>
