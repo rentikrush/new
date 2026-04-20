@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nuestra historia 💖</title>
+<title>Para ti 💖</title>
 
 <style>
 body {
@@ -11,7 +11,6 @@ body {
     font-family: Arial, sans-serif;
     color: white;
 
-    /* 🌄 ТВОЙ ФОН */
     background: 
         linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.75)),
         url("background.jpg");
@@ -21,16 +20,6 @@ body {
     background-attachment: fixed;
 }
 
-/* затемнение поверх (чтобы читалось) */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.2);
-    pointer-events: none;
-}
-
-/* 📦 контейнер */
 .container {
     max-width: 720px;
     margin: auto;
@@ -38,7 +27,12 @@ body::before {
     text-align: center;
 }
 
-/* 📸 фото */
+h1 {
+    color: #ffb6c1;
+    font-size: 22px;
+    margin-bottom: 30px;
+}
+
 img {
     width: 100%;
     max-width: 320px;
@@ -57,7 +51,6 @@ img {
     overflow: hidden;
 }
 
-/* скрытый текст */
 .message {
     position: absolute;
     inset: 0;
@@ -70,18 +63,16 @@ img {
     font-size: 16px;
 }
 
-/* canvas слой */
 canvas {
     position: absolute;
     inset: 0;
     touch-action: none;
 }
 
-/* подсказка */
 .hint {
     font-size: 14px;
     color: #ffb6c1;
-    margin-top: 8px;
+    margin-bottom: 20px;
 }
 </style>
 
@@ -91,36 +82,40 @@ canvas {
 
 <div class="container">
 
-<h2 style="color:#ffb6c1;">Nuestra historia 💖</h2>
+<h1>✨ frota con el dedo para leer ✨</h1>
 
 <img src="lola1.jpg">
 
 <div class="scratch">
     <div class="message">
-        Nos conocimos sin buscar nada especial…<br>
-        pero algunas personas simplemente llegan en el momento correcto 💖
+        Gracias por estar siempre conmigo, incluso en los momentos en los que todo es difícil 💖
     </div>
     <canvas></canvas>
 </div>
 
-<div class="hint">desliza para descubrir ✨</div>
+<div class="hint">desliza para descubrir 💫</div>
+
+<div class="scratch">
+    <div class="message">
+        Eres una persona increíble, de esas que hacen que todo alrededor se sienta más tranquilo y bonito ✨
+    </div>
+    <canvas></canvas>
+</div>
 
 <img src="lola2.jpg">
 
 <div class="scratch">
     <div class="message">
-        Con el tiempo, todo se volvió parte del día…<br>
-        y sin darme cuenta, empezó a importar más de lo esperado.
+        No sé cómo lo haces, pero siempre estás ahí cuando más te necesito. Gracias por eso 💕
     </div>
     <canvas></canvas>
 </div>
 
-<div class="hint">sigue revelando ✨</div>
+<div class="hint">sigue descubriendo 💖</div>
 
 <div class="scratch">
     <div class="message">
-        No sé si esto tiene un nombre…<br>
-        pero me gusta que seas parte de mi historia 💖
+        Simplemente gracias por existir en mi vida. No lo doy por hecho ni un segundo 💗
     </div>
     <canvas></canvas>
 </div>
@@ -142,7 +137,6 @@ function initScratch(el) {
         ctx.fillStyle = "#999";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // шум
         for (let i = 0; i < 600; i++) {
             ctx.fillStyle = "rgba(255,255,255,0.2)";
             ctx.fillRect(
